@@ -1,0 +1,41 @@
+{
+  "name": "event_graphql",
+  "version": "1.0.0",
+  "description": "Simple graphQL for events",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "node generate-types.js && npx graphql-codegen"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/derekjwilliams/event_graphql.git"
+  },
+  "keywords": [
+    "graphQL",
+    "Postgres",
+    "Events"
+  ],
+  "author": "derekjwilliams",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/derekjwilliams/event_graphql/issues"
+  },
+  "homepage": "https://github.com/derekjwilliams/event_graphql#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "graphql": "^15.10.1",
+    "pg": "^8.13.1",
+    "postgraphile": "^4.14.0",
+    "postgraphile-plugin-connection-filter": "^2.3.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.3",
+    "@graphql-codegen/typescript": "^4.1.2",
+    "@graphql-codegen/typescript-resolvers": "^4.4.1",
+    "@types/express": "^5.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
