@@ -4,7 +4,7 @@
   "description": "Simple graphQL for events",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
     "generate": "node generate-types.js && npx graphql-codegen"
   },
   "repository": {
