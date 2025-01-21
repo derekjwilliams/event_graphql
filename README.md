@@ -25,6 +25,7 @@ pnpm run generate
 
 ## Query Example, typical for RSS
 
+```gql
 {
   allTags(filter: { name: { in: ["Housing", "PNCA"] } }){
     nodes {
@@ -41,6 +42,7 @@ pnpm run generate
     }
   }
 }
+```
 
 ### With pubDate and Tags
 
