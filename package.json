@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/derekjwilliams/event_graphql#readme",
   "dependencies": {
+    "@graphile-contrib/pg-many-to-many": "^1.0.2",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "graphql": "^15.10.1",

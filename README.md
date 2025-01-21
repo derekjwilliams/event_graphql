@@ -23,3 +23,25 @@ pnpm run start
 pnpm run generate
 ```
 
+## Query Example, typical for RSS
+
+{
+  allTags(filter: { name: { in: ["Housing", "PNCA"] } }){
+    nodes {
+      name
+      eventsByEventTagTagIdAndEventId {
+        nodes {
+          title
+          pubDate
+          author
+          description
+          content
+        }
+      }
+    }
+  }
+}
+
+### With pubDate and Tags
+
+...

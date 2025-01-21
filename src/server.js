@@ -1,6 +1,8 @@
 import express from "express"
 import { postgraphile } from "postgraphile"
 import dotenv from "dotenv"
+import PostGraphileConnectionFilterPlugin from "postgraphile-plugin-connection-filter"
+import PgManyToManyPlugin from "@graphile-contrib/pg-many-to-many"
 
 dotenv.config()
 const app = express()
@@ -17,10 +19,11 @@ if (!DATABASE_URL) {
 app.use(
   postgraphile(DATABASE_URL, "public", {
     graphqlRoute: "/graphql",
-    graphiql: true, // Enable GraphiQL interface
+    graphiql: true,
     enhanceGraphiql: true,
     exportGqlSchemaPath: './generated/graphql-schema.graphql', // Use the pre-generated schema
     enableCors: true,
+    appendPlugins: [PostGraphileConnectionFilterPlugin, PgManyToManyPlugin],
   })
 )
 
