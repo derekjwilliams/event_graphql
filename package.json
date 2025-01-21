@@ -23,20 +23,17 @@
   },
   "homepage": "https://github.com/derekjwilliams/event_graphql#readme",
   "dependencies": {
-    "@graphile-contrib/pg-many-to-many": "^1.0.2",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "graphql": "^15.10.1",
+    "graphql": "15.10.1",
     "pg": "^8.13.1",
-    "postgraphile": "^4.14.0",
+    "postgraphile": "^4.14",
     "postgraphile-plugin-connection-filter": "^2.3.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^5.0.3",
-    "@graphql-codegen/typescript": "^4.1.2",
-    "@graphql-codegen/typescript-resolvers": "^4.4.1",
     "@types/express": "^5.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
-  }
+  },
+  "type": "module"
 }

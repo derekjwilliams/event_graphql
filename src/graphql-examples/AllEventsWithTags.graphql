@@ -1,0 +1,31 @@
+query getEventsByDateAndTags($pubDate: String!, $tagNames: [String!]!) {
+  getEventsByDateAndTags(pPubDate: $pubDate, pTagNames: $tagNames) {
+    nodes {
+      id
+      author
+      title
+      description
+      content
+      link
+      pubDate
+      createdAt
+      updatedAt
+      eventTagsByEventId {
+        nodes {
+          tagByTagId {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+
+#variables:
+
+{
+  "pubDate": "2024-01-19T21:26:03.6308+00:00",
+  "tagNames": ["Housing", "PNCA"]
+}
+
+# NOTE, if tagNames is empty then all are returned

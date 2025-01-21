@@ -123,6 +123,89 @@ type Query implements Node {
   tagById(id: Int!): Tag
   tagByName(name: String!): Tag
 
+  """Reads and enables pagination through a set of `Event`."""
+  getAllEvents(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventFilter
+  ): EventsConnection
+
+  """Reads and enables pagination through a set of `Event`."""
+  getEventsByDate(
+    pPubDate: String
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventFilter
+  ): EventsConnection
+
+  """Reads and enables pagination through a set of `Event`."""
+  getEventsByDateAndTags(
+    pPubDate: String
+    pTagNames: [String]
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EventFilter
+  ): EventsConnection
+
   """Reads a single `EventTag` using its globally unique `ID`."""
   eventTag(
     """The globally unique `ID` to be used in selecting a single `EventTag`."""
@@ -230,40 +313,6 @@ type Event implements Node {
     """
     filter: EventTagFilter
   ): EventTagsConnection!
-
-  """Reads and enables pagination through a set of `Tag`."""
-  tagsByEventTagEventIdAndTagId(
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """The method to use when ordering `Tag`."""
-    orderBy: [TagsOrderBy!] = [PRIMARY_KEY_ASC]
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: TagCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: TagFilter
-  ): EventTagsByEventTagEventIdAndTagIdManyToManyConnection!
 }
 
 """
@@ -360,23 +409,6 @@ input IntFilter {
   greaterThanOrEqualTo: Int
 }
 
-"""A connection to a list of `Tag` values, with data from `EventTag`."""
-type EventTagsByEventTagEventIdAndTagIdManyToManyConnection {
-  """A list of `Tag` objects."""
-  nodes: [Tag]!
-
-  """
-  A list of edges which contains the `Tag`, info from the `EventTag`, and the cursor to aid in pagination.
-  """
-  edges: [EventTagsByEventTagEventIdAndTagIdManyToManyEdge!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Tag` you could get from the connection."""
-  totalCount: Int!
-}
-
 type Tag implements Node {
   """
   A globally unique identifier. Can be used in various places throughout the system to identify this single value.
@@ -418,66 +450,15 @@ type Tag implements Node {
     """
     filter: EventTagFilter
   ): EventTagsConnection!
-
-  """Reads and enables pagination through a set of `Event`."""
-  eventsByEventTagTagIdAndEventId(
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """The method to use when ordering `Event`."""
-    orderBy: [EventsOrderBy!] = [PRIMARY_KEY_ASC]
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: EventCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: EventFilter
-  ): TagEventsByEventTagTagIdAndEventIdManyToManyConnection!
 }
 
-"""A connection to a list of `Event` values, with data from `EventTag`."""
-type TagEventsByEventTagTagIdAndEventIdManyToManyConnection {
-  """A list of `Event` objects."""
-  nodes: [Event]!
-
-  """
-  A list of edges which contains the `Event`, info from the `EventTag`, and the cursor to aid in pagination.
-  """
-  edges: [TagEventsByEventTagTagIdAndEventIdManyToManyEdge!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Event` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Event` edge in the connection, with data from `EventTag`."""
-type TagEventsByEventTagTagIdAndEventIdManyToManyEdge {
+"""A `EventTag` edge in the connection."""
+type EventTagsEdge {
   """A cursor for use in pagination."""
   cursor: Cursor
 
-  """The `Event` at the end of the edge."""
-  node: Event
+  """The `EventTag` at the end of the edge."""
+  node: EventTag
 }
 
 """Information about pagination in a connection."""
@@ -493,6 +474,32 @@ type PageInfo {
 
   """When paginating forwards, the cursor to continue."""
   endCursor: Cursor
+}
+
+"""A connection to a list of `Event` values."""
+type EventsConnection {
+  """A list of `Event` objects."""
+  nodes: [Event]!
+
+  """
+  A list of edges which contains the `Event` and cursor to aid in pagination.
+  """
+  edges: [EventsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Event` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Event` edge in the connection."""
+type EventsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Event` at the end of the edge."""
+  node: Event
 }
 
 """Methods to use when ordering `Event`."""
@@ -767,8 +774,25 @@ input DatetimeFilter {
   greaterThanOrEqualTo: Datetime
 }
 
-"""A `Tag` edge in the connection, with data from `EventTag`."""
-type EventTagsByEventTagEventIdAndTagIdManyToManyEdge {
+"""A connection to a list of `Tag` values."""
+type TagsConnection {
+  """A list of `Tag` objects."""
+  nodes: [Tag]!
+
+  """
+  A list of edges which contains the `Tag` and cursor to aid in pagination.
+  """
+  edges: [TagsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Tag` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Tag` edge in the connection."""
+type TagsEdge {
   """A cursor for use in pagination."""
   cursor: Cursor
 
@@ -816,67 +840,6 @@ input TagFilter {
 
   """Negates the expression."""
   not: TagFilter
-}
-
-"""A `EventTag` edge in the connection."""
-type EventTagsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `EventTag` at the end of the edge."""
-  node: EventTag
-}
-
-"""A connection to a list of `Event` values."""
-type EventsConnection {
-  """A list of `Event` objects."""
-  nodes: [Event]!
-
-  """
-  A list of edges which contains the `Event` and cursor to aid in pagination.
-  """
-  edges: [EventsEdge!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Event` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Event` edge in the connection."""
-type EventsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Event` at the end of the edge."""
-  node: Event
-}
-
-"""A connection to a list of `Tag` values."""
-type TagsConnection {
-  """A list of `Tag` objects."""
-  nodes: [Tag]!
-
-  """
-  A list of edges which contains the `Tag` and cursor to aid in pagination.
-  """
-  edges: [TagsEdge!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Tag` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Tag` edge in the connection."""
-type TagsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Tag` at the end of the edge."""
-  node: Tag
 }
 
 """
