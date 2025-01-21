@@ -132,3 +132,4 @@ dist
 # generated script
 README_GenSchemaAndTypes.md
 get-types.ts
+.vercel
