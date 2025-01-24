@@ -306,10 +306,14 @@ export type Event = Node & {
   content?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['Datetime']['output']>;
   description?: Maybe<Scalars['String']['output']>;
+  eventEndDate?: Maybe<Scalars['Datetime']['output']>;
+  eventStartDate?: Maybe<Scalars['Datetime']['output']>;
   /** Reads and enables pagination through a set of `EventTag`. */
   eventTagsByEventId: EventTagsConnection;
   id: Scalars['Int']['output'];
+  imageUrl?: Maybe<Scalars['String']['output']>;
   link?: Maybe<Scalars['String']['output']>;
+  location?: Maybe<Scalars['String']['output']>;
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
   nodeId: Scalars['ID']['output'];
   pubDate?: Maybe<Scalars['Datetime']['output']>;
@@ -339,10 +343,18 @@ export type EventCondition = {
   createdAt?: InputMaybe<Scalars['Datetime']['input']>;
   /** Checks for equality with the object’s `description` field. */
   description?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `eventEndDate` field. */
+  eventEndDate?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `eventStartDate` field. */
+  eventStartDate?: InputMaybe<Scalars['Datetime']['input']>;
   /** Checks for equality with the object’s `id` field. */
   id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `imageUrl` field. */
+  imageUrl?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `link` field. */
   link?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `location` field. */
+  location?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `pubDate` field. */
   pubDate?: InputMaybe<Scalars['Datetime']['input']>;
   /** Checks for equality with the object’s `title` field. */
@@ -363,10 +375,18 @@ export type EventFilter = {
   createdAt?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `description` field. */
   description?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `eventEndDate` field. */
+  eventEndDate?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `eventStartDate` field. */
+  eventStartDate?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `imageUrl` field. */
+  imageUrl?: InputMaybe<StringFilter>;
   /** Filter by the object’s `link` field. */
   link?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `location` field. */
+  location?: InputMaybe<StringFilter>;
   /** Negates the expression. */
   not?: InputMaybe<EventFilter>;
   /** Checks for any expressions in this list. */
@@ -385,8 +405,12 @@ export type EventInput = {
   content?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['Datetime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  eventEndDate?: InputMaybe<Scalars['Datetime']['input']>;
+  eventStartDate?: InputMaybe<Scalars['Datetime']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
+  imageUrl?: InputMaybe<Scalars['String']['input']>;
   link?: InputMaybe<Scalars['String']['input']>;
+  location?: InputMaybe<Scalars['String']['input']>;
   pubDate?: InputMaybe<Scalars['Datetime']['input']>;
   title: Scalars['String']['input'];
   updatedAt?: InputMaybe<Scalars['Datetime']['input']>;
@@ -398,8 +422,12 @@ export type EventPatch = {
   content?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['Datetime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  eventEndDate?: InputMaybe<Scalars['Datetime']['input']>;
+  eventStartDate?: InputMaybe<Scalars['Datetime']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
+  imageUrl?: InputMaybe<Scalars['String']['input']>;
   link?: InputMaybe<Scalars['String']['input']>;
+  location?: InputMaybe<Scalars['String']['input']>;
   pubDate?: InputMaybe<Scalars['Datetime']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   updatedAt?: InputMaybe<Scalars['Datetime']['input']>;
@@ -519,10 +547,18 @@ export enum EventsOrderBy {
   CreatedAtDesc = 'CREATED_AT_DESC',
   DescriptionAsc = 'DESCRIPTION_ASC',
   DescriptionDesc = 'DESCRIPTION_DESC',
+  EventEndDateAsc = 'EVENT_END_DATE_ASC',
+  EventEndDateDesc = 'EVENT_END_DATE_DESC',
+  EventStartDateAsc = 'EVENT_START_DATE_ASC',
+  EventStartDateDesc = 'EVENT_START_DATE_DESC',
   IdAsc = 'ID_ASC',
   IdDesc = 'ID_DESC',
+  ImageUrlAsc = 'IMAGE_URL_ASC',
+  ImageUrlDesc = 'IMAGE_URL_DESC',
   LinkAsc = 'LINK_ASC',
   LinkDesc = 'LINK_DESC',
+  LocationAsc = 'LOCATION_ASC',
+  LocationDesc = 'LOCATION_DESC',
   Natural = 'NATURAL',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
@@ -736,8 +772,6 @@ export type Query = Node & {
   eventTag?: Maybe<EventTag>;
   eventTagByEventIdAndTagId?: Maybe<EventTag>;
   /** Reads and enables pagination through a set of `Event`. */
-  getAllEvents?: Maybe<EventsConnection>;
-  /** Reads and enables pagination through a set of `Event`. */
   getEventsByDate?: Maybe<EventsConnection>;
   /** Reads and enables pagination through a set of `Event`. */
   getEventsByDateAndTags?: Maybe<EventsConnection>;
@@ -818,17 +852,6 @@ export type QueryEventTagArgs = {
 export type QueryEventTagByEventIdAndTagIdArgs = {
   eventId: Scalars['Int']['input'];
   tagId: Scalars['Int']['input'];
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryGetAllEventsArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<EventFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -1275,7 +1298,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = {
-  Node: ( Event ) | ( EventTag ) | ( Omit<Query, 'allEvents' | 'getAllEvents' | 'getEventsByDate' | 'getEventsByDateAndTags' | 'node' | 'query'> & { allEvents?: Maybe<_RefType['EventsConnection']>, getAllEvents?: Maybe<_RefType['EventsConnection']>, getEventsByDate?: Maybe<_RefType['EventsConnection']>, getEventsByDateAndTags?: Maybe<_RefType['EventsConnection']>, node?: Maybe<_RefType['Node']>, query: _RefType['Query'] } ) | ( Tag );
+  Node: ( Event ) | ( EventTag ) | ( Omit<Query, 'allEvents' | 'getEventsByDate' | 'getEventsByDateAndTags' | 'node' | 'query'> & { allEvents?: Maybe<_RefType['EventsConnection']>, getEventsByDate?: Maybe<_RefType['EventsConnection']>, getEventsByDateAndTags?: Maybe<_RefType['EventsConnection']>, node?: Maybe<_RefType['Node']>, query: _RefType['Query'] } ) | ( Tag );
 };
 
 /** Mapping between all available schema types and the resolvers types */
@@ -1477,9 +1500,13 @@ export type EventResolvers<ContextType = any, ParentType extends ResolversParent
   content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<Maybe<ResolversTypes['Datetime']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  eventEndDate?: Resolver<Maybe<ResolversTypes['Datetime']>, ParentType, ContextType>;
+  eventStartDate?: Resolver<Maybe<ResolversTypes['Datetime']>, ParentType, ContextType>;
   eventTagsByEventId?: Resolver<ResolversTypes['EventTagsConnection'], ParentType, ContextType, RequireFields<EventEventTagsByEventIdArgs, 'orderBy'>>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  imageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  location?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   nodeId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   pubDate?: Resolver<Maybe<ResolversTypes['Datetime']>, ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1565,7 +1592,6 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   eventById?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<QueryEventByIdArgs, 'id'>>;
   eventTag?: Resolver<Maybe<ResolversTypes['EventTag']>, ParentType, ContextType, RequireFields<QueryEventTagArgs, 'nodeId'>>;
   eventTagByEventIdAndTagId?: Resolver<Maybe<ResolversTypes['EventTag']>, ParentType, ContextType, RequireFields<QueryEventTagByEventIdAndTagIdArgs, 'eventId' | 'tagId'>>;
-  getAllEvents?: Resolver<Maybe<ResolversTypes['EventsConnection']>, ParentType, ContextType, Partial<QueryGetAllEventsArgs>>;
   getEventsByDate?: Resolver<Maybe<ResolversTypes['EventsConnection']>, ParentType, ContextType, Partial<QueryGetEventsByDateArgs>>;
   getEventsByDateAndTags?: Resolver<Maybe<ResolversTypes['EventsConnection']>, ParentType, ContextType, Partial<QueryGetEventsByDateAndTagsArgs>>;
   node?: Resolver<Maybe<ResolversTypes['Node']>, ParentType, ContextType, RequireFields<QueryNodeArgs, 'nodeId'>>;

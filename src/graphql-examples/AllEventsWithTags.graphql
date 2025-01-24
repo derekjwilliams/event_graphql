@@ -7,6 +7,7 @@ query getEventsByDateAndTags($pubDate: String!, $tagNames: [String!]!) {
       description
       content
       link
+      imageUrl
       pubDate
       createdAt
       updatedAt
