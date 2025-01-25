@@ -4,7 +4,7 @@
   "description": "Simple graphQL for events",
   "main": "index.js",
   "scripts": {
-    "start": "node api/index.js",
+    "start": "node api/index.ts",
     "start_local": "node --experimental-strip-types api/index.ts",
     "generate": "node generate-types.js && npx graphql-codegen",
     "codegen": "graphql-codegen --config codegen.ts"
