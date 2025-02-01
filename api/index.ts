@@ -1,6 +1,8 @@
 import express from "express"
 import { postgraphile } from "postgraphile"
 import PostGraphileConnectionFilterPlugin from "postgraphile-plugin-connection-filter"
+import PostgisPlugin from "@graphile/postgis"
+
 import dotenv from "dotenv"
 
 dotenv.config()
@@ -15,13 +17,15 @@ if (!DATABASE_URL) {
 
 app.use(
   postgraphile(DATABASE_URL, "public", {
+    // @ts-ignore
+    appendPlugins: [PostGraphileConnectionFilterPlugin, PostgisPlugin.default],
     graphqlRoute: "/graphql",
     graphiql: true,
     enhanceGraphiql: true,
+    dynamicJson: true,
     // exportGqlSchemaPath: './graphql-schema.graphql', // Use the pre-generated schema
     enableCors: true,
     allowExplain: true,
-    appendPlugins: [PostGraphileConnectionFilterPlugin],
   })
 )
 

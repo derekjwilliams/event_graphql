@@ -1,5 +1,6 @@
 import { createPostGraphileSchema } from "postgraphile";
 import connectionFilterPlugin from "postgraphile-plugin-connection-filter";
+import PostgisPlugin from "@graphile/postgis"
 import { printSchema } from "graphql";
 import fs from "fs";
 import dotenv from "dotenv";
@@ -13,7 +14,8 @@ async function generateSchema() {
   try {
     // Generate GraphQL schema from Postgres database with the connection filter plugin
     const schema = await createPostGraphileSchema(DATABASE_URL, "public", {
-      appendPlugins: [connectionFilterPlugin],
+      dynamicJson: true,
+      appendPlugins: [connectionFilterPlugin, PostgisPlugin.default],
     });
 
     // Convert schema to SDL (Schema Definition Language)
