@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node api/index.ts",
     "start_local": "node --experimental-strip-types api/index.ts",
-    "generate": "node generate-types.js && npx graphql-codegen",
+    "generate": "node generate-types.js && npx graphql-codegen --config codegen.ts",
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "repository": {

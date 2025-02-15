@@ -16,8 +16,8 @@ CREATE SEQUENCE public.events_id_seq
 
 -- Permissions
 
-ALTER SEQUENCE public.events_id_seq OWNER TO postgres;
-GRANT ALL ON SEQUENCE public.events_id_seq TO postgres;
+ALTER SEQUENCE public.events_id_seq OWNER TO neondb_owner;
+GRANT ALL ON SEQUENCE public.events_id_seq TO neondb_owner;
 GRANT ALL ON SEQUENCE public.events_id_seq TO anon;
 GRANT ALL ON SEQUENCE public.events_id_seq TO authenticated;
 GRANT ALL ON SEQUENCE public.events_id_seq TO service_role;
@@ -34,8 +34,8 @@ CREATE SEQUENCE public.tags_id_seq
 
 -- Permissions
 
-ALTER SEQUENCE public.tags_id_seq OWNER TO postgres;
-GRANT ALL ON SEQUENCE public.tags_id_seq TO postgres;
+ALTER SEQUENCE public.tags_id_seq OWNER TO neondb_owner;
+GRANT ALL ON SEQUENCE public.tags_id_seq TO neondb_owner;
 GRANT ALL ON SEQUENCE public.tags_id_seq TO anon;
 GRANT ALL ON SEQUENCE public.tags_id_seq TO authenticated;
 GRANT ALL ON SEQUENCE public.tags_id_seq TO service_role;
@@ -60,8 +60,8 @@ CREATE TABLE public.events (
 
 -- Permissions
 
-ALTER TABLE public.events OWNER TO postgres;
-GRANT ALL ON TABLE public.events TO postgres;
+ALTER TABLE public.events OWNER TO neondb_owner;
+GRANT ALL ON TABLE public.events TO neondb_owner;
 GRANT ALL ON TABLE public.events TO anon;
 GRANT ALL ON TABLE public.events TO authenticated;
 GRANT ALL ON TABLE public.events TO service_role;
@@ -83,8 +83,8 @@ CREATE INDEX idx_tags_name ON public.tags USING btree (name);
 
 -- Permissions
 
-ALTER TABLE public.tags OWNER TO postgres;
-GRANT ALL ON TABLE public.tags TO postgres;
+ALTER TABLE public.tags OWNER TO neondb_owner;
+GRANT ALL ON TABLE public.tags TO neondb_owner;
 GRANT ALL ON TABLE public.tags TO anon;
 GRANT ALL ON TABLE public.tags TO authenticated;
 GRANT ALL ON TABLE public.tags TO service_role;
@@ -106,8 +106,8 @@ CREATE TABLE public.event_tags (
 
 -- Permissions
 
-ALTER TABLE public.event_tags OWNER TO postgres;
-GRANT ALL ON TABLE public.event_tags TO postgres;
+ALTER TABLE public.event_tags OWNER TO neondb_owner;
+GRANT ALL ON TABLE public.event_tags TO neondb_owner;
 GRANT ALL ON TABLE public.event_tags TO anon;
 GRANT ALL ON TABLE public.event_tags TO authenticated;
 GRANT ALL ON TABLE public.event_tags TO service_role;
@@ -132,9 +132,9 @@ COMMENT ON FUNCTION public.get_all_events() IS '@graphqlName getAllEvents';
 
 -- Permissions
 
-ALTER FUNCTION public.get_all_events() OWNER TO postgres;
+ALTER FUNCTION public.get_all_events() OWNER TO neondb_owner;
 GRANT ALL ON FUNCTION public.get_all_events() TO public;
-GRANT ALL ON FUNCTION public.get_all_events() TO postgres;
+GRANT ALL ON FUNCTION public.get_all_events() TO neondb_owner;
 GRANT ALL ON FUNCTION public.get_all_events() TO anon;
 GRANT ALL ON FUNCTION public.get_all_events() TO authenticated;
 GRANT ALL ON FUNCTION public.get_all_events() TO service_role;
@@ -160,9 +160,9 @@ COMMENT ON FUNCTION public.get_events_by_date(text) IS '@graphqlName getEventsBy
 
 -- Permissions
 
-ALTER FUNCTION public.get_events_by_date(text) OWNER TO postgres;
+ALTER FUNCTION public.get_events_by_date(text) OWNER TO neondb_owner;
 GRANT ALL ON FUNCTION public.get_events_by_date(text) TO public;
-GRANT ALL ON FUNCTION public.get_events_by_date(text) TO postgres;
+GRANT ALL ON FUNCTION public.get_events_by_date(text) TO neondb_owner;
 GRANT ALL ON FUNCTION public.get_events_by_date(text) TO anon;
 GRANT ALL ON FUNCTION public.get_events_by_date(text) TO authenticated;
 GRANT ALL ON FUNCTION public.get_events_by_date(text) TO service_role;
@@ -193,9 +193,9 @@ COMMENT ON FUNCTION public.get_events_by_date_and_tags(text, _text) IS '@graphql
 
 -- Permissions
 
-ALTER FUNCTION public.get_events_by_date_and_tags(text, _text) OWNER TO postgres;
+ALTER FUNCTION public.get_events_by_date_and_tags(text, _text) OWNER TO neondb_owner;
 GRANT ALL ON FUNCTION public.get_events_by_date_and_tags(text, _text) TO public;
-GRANT ALL ON FUNCTION public.get_events_by_date_and_tags(text, _text) TO postgres;
+GRANT ALL ON FUNCTION public.get_events_by_date_and_tags(text, _text) TO neondb_owner;
 GRANT ALL ON FUNCTION public.get_events_by_date_and_tags(text, _text) TO anon;
 GRANT ALL ON FUNCTION public.get_events_by_date_and_tags(text, _text) TO authenticated;
 GRANT ALL ON FUNCTION public.get_events_by_date_and_tags(text, _text) TO service_role;
@@ -205,31 +205,31 @@ GRANT ALL ON FUNCTION public.get_events_by_date_and_tags(text, _text) TO service
 
 GRANT ALL ON SCHEMA public TO pg_database_owner;
 GRANT USAGE ON SCHEMA public TO public;
-GRANT USAGE ON SCHEMA public TO postgres;
+GRANT USAGE ON SCHEMA public TO neondb_owner;
 GRANT USAGE ON SCHEMA public TO anon;
 GRANT USAGE ON SCHEMA public TO authenticated;
 GRANT USAGE ON SCHEMA public TO service_role;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT INSERT, TRUNCATE, REFERENCES, SELECT, DELETE, TRIGGER, UPDATE ON TABLES TO postgres;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT INSERT, TRUNCATE, REFERENCES, SELECT, DELETE, TRIGGER, UPDATE ON TABLES TO neondb_owner;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT INSERT, TRUNCATE, REFERENCES, SELECT, DELETE, TRIGGER, UPDATE ON TABLES TO anon;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT INSERT, TRUNCATE, REFERENCES, SELECT, DELETE, TRIGGER, UPDATE ON TABLES TO authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT INSERT, TRUNCATE, REFERENCES, SELECT, DELETE, TRIGGER, UPDATE ON TABLES TO service_role;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT EXECUTE ON FUNCTIONS TO postgres;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT EXECUTE ON FUNCTIONS TO neondb_owner;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT EXECUTE ON FUNCTIONS TO anon;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT EXECUTE ON FUNCTIONS TO authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT EXECUTE ON FUNCTIONS TO service_role;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, USAGE, UPDATE ON SEQUENCES TO postgres;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, USAGE, UPDATE ON SEQUENCES TO neondb_owner;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, USAGE, UPDATE ON SEQUENCES TO anon;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, USAGE, UPDATE ON SEQUENCES TO authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, USAGE, UPDATE ON SEQUENCES TO service_role;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, USAGE, UPDATE ON SEQUENCES TO postgres;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, USAGE, UPDATE ON SEQUENCES TO neondb_owner;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, USAGE, UPDATE ON SEQUENCES TO anon;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, USAGE, UPDATE ON SEQUENCES TO authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, USAGE, UPDATE ON SEQUENCES TO service_role;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT INSERT, TRUNCATE, REFERENCES, SELECT, DELETE, TRIGGER, UPDATE ON TABLES TO postgres;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT INSERT, TRUNCATE, REFERENCES, SELECT, DELETE, TRIGGER, UPDATE ON TABLES TO neondb_owner;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT INSERT, TRUNCATE, REFERENCES, SELECT, DELETE, TRIGGER, UPDATE ON TABLES TO anon;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT INSERT, TRUNCATE, REFERENCES, SELECT, DELETE, TRIGGER, UPDATE ON TABLES TO authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT INSERT, TRUNCATE, REFERENCES, SELECT, DELETE, TRIGGER, UPDATE ON TABLES TO service_role;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT EXECUTE ON FUNCTIONS TO postgres;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT EXECUTE ON FUNCTIONS TO neondb_owner;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT EXECUTE ON FUNCTIONS TO anon;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT EXECUTE ON FUNCTIONS TO authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT EXECUTE ON FUNCTIONS TO service_role;
