@@ -23,6 +23,7 @@ app.use(
     graphiql: true,
     enhanceGraphiql: true,
     dynamicJson: true,
+    // watchPg: true,
     //exportGqlSchemaPath: './generated/graphql-schema.graphql', // Use the pre-generated schema
     enableCors: true,
     allowExplain: true,

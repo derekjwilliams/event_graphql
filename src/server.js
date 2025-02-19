@@ -29,7 +29,7 @@ app.use(
     graphqlRoute: "/graphql",
     graphiql: true,
     enhanceGraphiql: true,
-    exportGqlSchemaPath: './generated/graphql-schema.graphql', // Use the pre-generated schema
+    // exportGqlSchemaPath: './generated/graphql-schema.graphql', // Use the pre-generated schema
     // enableCors: true,
     allowExplain: true,
     appendPlugins: [PostGraphileConnectionFilterPlugin],
